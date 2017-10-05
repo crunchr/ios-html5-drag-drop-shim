@@ -13,17 +13,6 @@ function _exposeIosHtml5DragDropShim(config) {
 
     coordinateSystemForElementFromPoint = navigator.userAgent.match(/OS [1-4](?:_\d+)+ like Mac/) ? "page" : "client";
 
-    var div = doc.createElement('div');
-    var dragDiv = 'draggable' in div;
-    var evts = 'ondragstart' in div && 'ondrop' in div;
-
-    var needsPatch = !(dragDiv || evts) || /iPad|iPhone|iPod|Android/.test(navigator.userAgent);
-    log((needsPatch ? "" : "not ") + "patching html5 drag drop");
-
-    if(!needsPatch) {
-      return;
-    }
-
     if(!config.enableEnterLeave) {
       DragDrop.prototype.synthesizeEnterLeave = noop;
     }
